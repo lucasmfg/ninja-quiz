@@ -1,5 +1,6 @@
 const correctAnswers = ["B", "B", "B", "B"];
 const form = document.querySelector(".quiz-form");
+const result = document.querySelector(".result");
 
 form.addEventListener("submit", (e) => {
   // Previne de atualizar ao apertar submit.
@@ -22,5 +23,21 @@ form.addEventListener("submit", (e) => {
       score += 25;
     }
   });
-  console.log(score);
+
+  // Método que leva automaticamente para onde você decidir.
+  scrollTo(0, 0);
+
+  // Mostrar o resultado na tela
+  result.classList.remove("d-none", "py-3");
+
+  // Cria uma animação ao mostrar o resultado
+  let output = 0;
+  const timer = setInterval(() => {
+    result.querySelector("span").textContent = `${output}%`;
+    if (output === score) {
+      clearInterval(timer);
+    } else {
+      output++;
+    }
+  }, 10);
 });
